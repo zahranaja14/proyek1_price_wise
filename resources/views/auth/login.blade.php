@@ -1,47 +1,43 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <div class="space-y-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold text-white">Welcome back</h2>
+            <p class="mt-2 text-sm text-slate-400">Masuk untuk melanjutkan ke akun Price Wise Anda.</p>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <x-auth-session-status class="rounded-2xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-sm text-emerald-200" :status="session('status')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+        <form method="POST" action="{{ route('login') }}" class="space-y-6">
+            @csrf
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <div>
+                <x-input-label for="email" :value="__('Email')" class="text-slate-200" />
+                <x-text-input id="email" class="mt-1 block w-full bg-slate-950 text-white border-slate-700 focus:border-teal-500 focus:ring-teal-500" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm text-rose-300" />
+            </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+            <div>
+                <x-input-label for="password" :value="__('Password')" class="text-slate-200" />
+                <x-text-input id="password" class="mt-1 block w-full bg-slate-950 text-white border-slate-700 focus:border-teal-500 focus:ring-teal-500" type="password" name="password" required autocomplete="current-password" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2 text-sm text-rose-300" />
+            </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+            <div class="flex items-center justify-between gap-4">
+                <label for="remember_me" class="inline-flex items-center gap-2 text-sm text-slate-300">
+                    <input id="remember_me" type="checkbox" class="rounded border-slate-700 bg-slate-950 text-teal-500 shadow-sm focus:border-teal-500 focus:ring-teal-500" name="remember">
+                    {{ __('ingatkan saya') }}
+                </label>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
+                @if (Route::has('password.request'))
+                    <a class="text-sm text-teal-300 hover:text-teal-100 transition" href="{{ route('password.request') }}">
+                        {{ __('Lupa password?') }}
+                    </a>
+                @endif
+            </div>
+
+            <x-primary-button class="w-full bg-teal-600 hover:bg-teal-500 text-white">
+                {{ __('Masuk') }}
             </x-primary-button>
-        </div>
-    </form>
+        </form>
+    </div>
 </x-guest-layout>

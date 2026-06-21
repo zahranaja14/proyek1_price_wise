@@ -25,4 +25,16 @@ use HasFactory;
     {
         return $this->belongsTo(Category::class);
     }
+
+    // Relasi ke Seller (User)
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Relasi ke Order Details
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

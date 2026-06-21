@@ -61,7 +61,64 @@ class TransactionController extends Controller
     // 3. Menampilkan riwayat pembelian barang dari sisi Buyer
     public function history()
     {
-        $orders = Order::where('user_id', Auth::id())->latest()->get();
+        // Hubungkan ke orderDetails dan produk agar bisa ditampilkan di riwayat pembelian buyer
+        $orders = Order::where('user_id', Auth::id())->with('orderDetails.product')->latest()->get();
         return view('buyer.history', compact('orders'));
+    }
+
+    // 4. Menampilkan daftar pesanan masuk dari sisi Seller
+    public function sellerOrders()
+    {
+        // Mengambil order details yang produknya milik seller yang sedang login
+        $orderDetails = OrderDetail::whereHas('product', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->with(['product', 'order.user'])->latest()->get();
+
+        return view('seller.orders.index', compact('orderDetails'));
+    }
+
+    // 5. Verifikasi pesanan (Approve / Reject) dari sisi Seller
+    public function verifyOrder(Request $request, $order_id)
+    {
+        $order = Order::findOrFail($order_id);
+
+        // Pastikan order ini berisi produk milik seller yang sedang login
+        $hasAccess = OrderDetail::where('order_id', $order->id)
+            ->whereHas('product', function ($query) {
+                $query->where('user_id', Auth::id());
+            })->exists();
+
+        if (!$hasAccess) {
+            abort(403, 'Aksi tidak sah.');
+        }
+
+        $request->validate([
+            'action' => 'required|in:approve,reject',
+        ]);
+
+        try {
+            DB::transaction(function () use ($order, $request) {
+                if ($request->action === 'approve') {
+                    $order->update(['status' => 'lunas']);
+
+                    // Kurangi stok produk yang dibeli
+                    foreach ($order->orderDetails as $detail) {
+                        $product = $detail->product;
+                        if ($product->stok >= $detail->jumlah) {
+                            $product->decrement('stok', $detail->jumlah);
+                        } else {
+                            throw new \Exception("Stok untuk produk '{$product->nama_produk}' tidak mencukupi.");
+                        }
+                    }
+                } else {
+                    $order->update(['status' => 'dibatalkan']);
+                }
+            });
+
+            $statusMessage = $request->action === 'approve' ? 'Pesanan berhasil disetujui (Lunas)!' : 'Pesanan berhasil dibatalkan.';
+            return redirect()->route('seller.orders')->with('success', $statusMessage);
+        } catch (\Exception $e) {
+            return redirect()->route('seller.orders')->with('error', $e->getMessage());
+        }
     }
 }

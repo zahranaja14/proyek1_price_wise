@@ -13,11 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Seed default categories
+        $categories = ['Elektronik', 'Pakaian', 'Buku', 'Otomotif', 'Lain-lain'];
+        foreach ($categories as $name) {
+            \App\Models\Category::firstOrCreate(['name' => $name]);
+        }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Seed a default test user if it doesn't exist
+        if (!User::where('email', 'test@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+                'role' => 'buyer',
+            ]);
+        }
     }
 }

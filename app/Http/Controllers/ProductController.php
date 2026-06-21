@@ -17,12 +17,11 @@ class ProductController extends Controller
         return view('seller.products.index', compact('products'));
     }
 
-    // 2. CREATE: Menampilkan halaman form tambah produk
     public function create()
-    {
-        $categories = Category::all(); // Mengambil semua kategori untuk opsi dropdown di form
-        return view('seller.products.create', compact('categories'));
-    }
+{
+    $categories = \App\Models\Category::all(); // Pastikan ambil data dari model
+    return view('seller.products.create', compact('categories'));
+}
 
     // 3. STORE: Logika untuk memproses dan menyimpan data produk baru ke database
     public function store(Request $request)
