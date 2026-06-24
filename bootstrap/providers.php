@@ -1,5 +1,12 @@
 <?php
 
+<<<<<<< HEAD
 return [
     App\Providers\AppServiceProvider::class,
+=======
+use App\Providers\AppServiceProvider;
+
+return [
+    AppServiceProvider::class,
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
 ];

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
@@ -68,3 +69,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+=======
+
+Route::get('/', function () {
+    return view('welcome');
+});
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
@@ -18,6 +19,32 @@
         "nunomaduro/collision": "^8.0",
         "phpunit/phpunit": "^10.5",
         "spatie/laravel-ignition": "^2.4"
+=======
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "laravel/framework": "^13.8",
+        "laravel/tinker": "^3.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/boost": "^2.2",
+        "laravel/pail": "^1.2.5",
+        "laravel/pao": "^1.0.6",
+        "laravel/pint": "^1.27",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^4.7",
+        "pestphp/pest-plugin-laravel": "^4.1"
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
     },
     "autoload": {
         "psr-4": {
@@ -32,12 +59,36 @@
         }
     },
     "scripts": {
+<<<<<<< HEAD
+=======
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install --ignore-scripts",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi @no_additional_args",
+            "@php artisan test"
+        ],
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
+<<<<<<< HEAD
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+=======
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan boost:update --ansi"
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -45,6 +96,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+<<<<<<< HEAD
             "@php artisan migrate --ansi"
         ]
     },
@@ -52,6 +104,15 @@
         "branch-alias": {
             "dev-master": "11.x-dev"
         },
+=======
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ]
+    },
+    "extra": {
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
         "laravel": {
             "dont-discover": []
         }
@@ -63,11 +124,18 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+<<<<<<< HEAD
         },
         "audit": {
             "block-insecure": false
+=======
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
         }
     },
     "minimum-stability": "stable",
     "prefer-stable": true
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7

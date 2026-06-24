@@ -13,8 +13,13 @@ return [
     | incoming requests. Laravel supports a variety of storage options to
     | persist session data. Database storage is a great default choice.
     |
+<<<<<<< HEAD
     | Supported: "file", "cookie", "database", "apc",
     |            "memcached", "redis", "dynamodb", "array"
+=======
+    | Supported: "file", "cookie", "database", "memcached",
+    |            "redis", "dynamodb", "array"
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
     |
     */
 
@@ -32,7 +37,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'lifetime' => env('SESSION_LIFETIME', 120),
+=======
+    'lifetime' => (int) env('SESSION_LIFETIME', 120),
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
 
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
 
@@ -97,7 +106,11 @@ return [
     | define the cache store which should be used to store the session data
     | between requests. This must match one of your defined cache stores.
     |
+<<<<<<< HEAD
     | Affects: "apc", "dynamodb", "memcached", "redis"
+=======
+    | Affects: "dynamodb", "memcached", "redis"
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
     |
     */
 
@@ -125,12 +138,19 @@ return [
     | the framework. Typically, you should not need to change this value
     | since doing so does not grant a meaningful security improvement.
     |
+<<<<<<< HEAD
     |
+=======
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
     */
 
     'cookie' => env(
         'SESSION_COOKIE',
+<<<<<<< HEAD
         Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+=======
+        Str::slug((string) env('APP_NAME', 'laravel')).'-session'
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
     ),
 
     /*
@@ -153,7 +173,11 @@ return [
     |
     | This value determines the domain and subdomains the session cookie is
     | available to. By default, the cookie will be available to the root
+<<<<<<< HEAD
     | domain and all subdomains. Typically, this shouldn't be changed.
+=======
+    | domain without subdomains. Typically, this shouldn't be changed.
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
     |
     */
 
@@ -215,4 +239,23 @@ return [
 
     'partitioned' => env('SESSION_PARTITIONED_COOKIE', false),
 
+<<<<<<< HEAD
+=======
+    /*
+    |--------------------------------------------------------------------------
+    | Session Serialization
+    |--------------------------------------------------------------------------
+    |
+    | This value controls the serialization strategy for session data, which
+    | is JSON by default. Setting this to "php" allows the storage of PHP
+    | objects in the session but can make an application vulnerable to
+    | "gadget chain" serialization attacks if the APP_KEY is leaked.
+    |
+    | Supported: "json", "php"
+    |
+    */
+
+    'serialization' => 'json',
+
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
 ];

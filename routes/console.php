@@ -5,4 +5,8 @@ use Illuminate\Support\Facades\Artisan;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
+<<<<<<< HEAD
 })->purpose('Display an inspiring quote')->hourly();
+=======
+})->purpose('Display an inspiring quote');
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7

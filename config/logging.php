@@ -45,7 +45,11 @@ return [
     | utilizes the Monolog PHP logging library, which includes a variety
     | of powerful log handlers and formatters that you're free to use.
     |
+<<<<<<< HEAD
     | Available Drivers: "single", "daily", "slack", "syslog",
+=======
+    | Available drivers: "single", "daily", "slack", "syslog",
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
     |                    "errorlog", "monolog", "custom", "stack"
     |
     */
@@ -54,7 +58,11 @@ return [
 
         'stack' => [
             'driver' => 'stack',
+<<<<<<< HEAD
             'channels' => explode(',', env('LOG_STACK', 'single')),
+=======
+            'channels' => explode(',', (string) env('LOG_STACK', 'single')),
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
             'ignore_exceptions' => false,
         ],
 
@@ -76,7 +84,11 @@ return [
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
+<<<<<<< HEAD
             'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'),
+=======
+            'username' => env('LOG_SLACK_USERNAME', env('APP_NAME', 'Laravel')),
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
             'emoji' => env('LOG_SLACK_EMOJI', ':boom:'),
             'level' => env('LOG_LEVEL', 'critical'),
             'replace_placeholders' => true,
@@ -98,10 +110,17 @@ return [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => StreamHandler::class,
+<<<<<<< HEAD
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [
                 'stream' => 'php://stderr',
             ],
+=======
+            'handler_with' => [
+                'stream' => 'php://stderr',
+            ],
+            'formatter' => env('LOG_STDERR_FORMATTER'),
+>>>>>>> 319262988641d4c273e1d24f8892db696a9c9cc7
             'processors' => [PsrLogMessageProcessor::class],
         ],
 
